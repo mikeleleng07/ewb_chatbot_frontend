@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('webchat'));
 root.render(
   <React.StrictMode>
     <App />

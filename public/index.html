@@ -2,42 +2,82 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
+    <meta name="description" content="ESTA Chatbot Web App" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32 64x64" href="%PUBLIC_URL%/favicon.ico">
+    <link rel="icon" type="image/png" sizes="196x196" href="%PUBLIC_URL%/favicon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/favicon-180.png">
+
+    <!-- Manifest & MS Tiles -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="msapplication-TileImage" content="%PUBLIC_URL%/favicon-144.png">
+    <meta name="msapplication-config" content="%PUBLIC_URL%/browserconfig.xml">
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    <title>ESTA Chatbot</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .unsupported-browser {
+        text-align: center;
+        margin-top: 50px;
+      }
+      .unsupported-browser img {
+        width: 48px;
+        height: 48px;
+        vertical-align: middle;
+        margin-right: 8px;
+      }
+      .header-img {
+        height: 100px;
+        background-color: #f5f5f5; /* Example header background */
+      }
+    </style>
   </head>
+
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    <div class="header-img"></div>
+    <div id="webchat"></div>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    <script>
+      // Feature detection for modern browsers
+      function isBrowserSupported() {
+        try {
+          new Function("(a = 0) => a");        // Arrow function + default param
+          const obj = { a: 1, b: 2 };
+          const { a, b } = obj;                // Destructuring
+          [1,2,3].includes(2);                 // Array.includes
+          async function testAsync() { return 1; } // Async function
+          if (typeof structuredClone !== "function") {
+            throw new Error("structuredClone not supported");
+          }
+          return true;
+        } catch (e) {
+          return false;
+        }
+      }
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+      if (!isBrowserSupported()) {
+        document.body.innerHTML = `
+          <div class="unsupported-browser">
+            <img src="%PUBLIC_URL%/favicon.ico" alt="favicon" />
+            <h2>Unsupported Browser</h2>
+            <p>Please use a modern browser.</p>
+            <p>Recommended browsers: Chrome, Edge, Firefox, Safari (latest versions).</p>
+          </div>
+        `;
+      }
+    </script>
   </body>
 </html>
